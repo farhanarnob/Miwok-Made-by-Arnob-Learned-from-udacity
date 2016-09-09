@@ -30,14 +30,16 @@ public class PhrasesFragment extends Fragment {
     private AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
-            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
-                    || focusChange == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK) {
-                mediaPlayer.pause();
-                mediaPlayer.seekTo(0);
-            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-                mediaPlayer.start();
-            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-                releasedMediaPlayer();
+            if (mediaPlayer != null) {
+                if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
+                        || focusChange == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK) {
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(0);
+                } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                    mediaPlayer.start();
+                } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                    releasedMediaPlayer();
+                }
             }
         }
     };

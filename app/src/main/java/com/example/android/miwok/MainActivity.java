@@ -15,15 +15,9 @@
  */
 package com.example.android.miwok;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,44 +25,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
-        TextView numbers = (TextView) findViewById(R.id.numbers);
-        numbers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent numberaIntent = new Intent(MainActivity.this,NumbersActivity.class);
-                startActivity(numberaIntent);
-            }
-        });
-        final TextView colors = (TextView) findViewById(R.id.colors);
-        colors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent colorsIntent = new Intent(MainActivity.this,ColorsActivity.class);
-                startActivity(colorsIntent);
-            }
-        });
 
-        TextView family = (TextView) findViewById(R.id.family);
-        family.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-                startActivity(familyIntent);
-            }
-        });
-        TextView phrases = (TextView) findViewById(R.id.phrases);
-        phrases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent phrases = new Intent(MainActivity.this,PhrasesActivity.class);
-                startActivity(phrases);
-            }
-        });
+        // finding view pager that will allow the user to swipw between fragments
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        // crete an adapter that knows which fragment should be shown in each page
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getSupportFragmentManager());
+
+        //set the adapter onte the view pager
+        viewPager.setAdapter(categoryAdapter);
+
+
     }
 
 
