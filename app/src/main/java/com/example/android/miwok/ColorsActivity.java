@@ -12,7 +12,6 @@ public class ColorsActivity extends AppCompatActivity {
         //creating up navigation action
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new ColorsFragment()).commit();
         //Array list for color word
-
     }
 
     @Override
