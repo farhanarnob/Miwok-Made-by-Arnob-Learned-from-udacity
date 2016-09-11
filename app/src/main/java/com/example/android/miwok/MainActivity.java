@@ -16,6 +16,7 @@
 package com.example.android.miwok;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -31,10 +32,21 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // crete an adapter that knows which fragment should be shown in each page
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getSupportFragmentManager());
+        CategoryAdapter categoryAdapter = new CategoryAdapter(getSupportFragmentManager(), this);
 
         //set the adapter onte the view pager
         viewPager.setAdapter(categoryAdapter);
+
+        // find the tab layout that shows the tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+        //connect the tab layout with the view pager.
+        //This will ->
+        // uddate the tab layout when the view pager is swiped
+        // update the view page when a tab is selected
+        // set the tab layout's tab names with the view pager's adaper's titles
+        // by calling onPageTitle()
+        tabLayout.setupWithViewPager(viewPager);
 
 
     }
